@@ -2,6 +2,21 @@
 <title>
   Excel
 </title>
+<link href="/bootstrap.min.css" rel="stylesheet">
+<link href="/flexslider.css" rel="stylesheet">
+<link href="/templatemo-style.css" rel="stylesheet">
+
+<style>
+  .bottombox{
+    top:25%;
+  }
+   .bottombox h1{
+    padding:5dp;
+    text-align: center;
+  }
+</style>
+  
+
 </head>
 <body>
 <% console.log(Scopus);%>
@@ -67,11 +82,29 @@
     form.submit();
   }
 </script>
+</table>
 
-  </table>
-  <div id='buttondiv'>
-  <button id="addNew" type="submit"><a href="/addNew" > Add new </a></button>
+<div class="form-group text-center">
+  <button id="addNew" type="submit" class="tm-yellow-btn" ><a href="/addNew" > Add new </a></button>
 </div>
+
+<div class="tm-search-box effect2 bottombox">
+  
+  <h1 id = "subscribe">Subscribe for more updates!!</h1>
+  <div class="tm-form-inner">
+  <form action = "/emailing" method = "GET" class="hotel-search-form">	
+    <div class="form-group">
+    <input class="form-control" type ="text" placeholder = "Email " id="emailInput" name="email">	
+    </div>		
+  </div>			
+    <div class="form-group  text-center">
+      <button type="submit" name="submit" id="emailSubmit" class="tm-yellow-btn" >Submit</button>
+    </div>  
+  </form>
+</div>
+
+</div>
+
 </div>
 
 <%- include ('partials/footer.ejs'); -%>

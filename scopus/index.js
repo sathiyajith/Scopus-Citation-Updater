@@ -5,6 +5,7 @@ const apikey = '951919cec39c3b1f09885ba8575b587b'
 const xml = require("xml-parse");
 var OrcidStrategy = require('passport-orcid').Strategy;
 var mongoose = require("mongoose");
+var nodemailer = require('nodemailer');
 
 
 var ScopusSchema = new mongoose.Schema({
@@ -30,6 +31,64 @@ app.set("view engine","ejs");
 
 console.log("welcome to home");
 
+
+app.get("/emailing",function(req,res)
+{
+    var email = req.query.email;
+    if (email==undefined)
+    {
+        console.log("no email");
+    }
+    else
+    {
+    Scopus.find({},function(err,AllScopus)
+    {
+        if(err)
+        {
+            console.log("finding is wrong");
+        }
+        else{
+            var alldata = AllScopus;
+            console.log("emailing");
+            console.log(alldata);
+            var req="";
+            var strings;
+            strings = "NAME     --->    CITATION COUNT";
+            req+=strings+"\n";
+            for(var i=0;i<alldata.length;i++)
+            {
+                strings=alldata[i]["name"]+"\t-->\t"+alldata[i]["citationCount"];
+                req+=strings+"\n";
+            }
+            var transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                  user: 'vckuttralam@gmail.com',
+                  pass: 'scopus2020'
+                }
+            });
+
+            var mailOptions = {
+                from: 'vckuttralam@gmail.com',
+                to: email,
+                subject: 'Thanks for using our app. Here is ur requested data',
+                text: req
+              };
+
+              
+            
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
+            console.log("email ends here");
+        }
+    })
+    }
+})
 app.get("/authenticate",function(req,res)
 {
     var name = req.query.orcid;
