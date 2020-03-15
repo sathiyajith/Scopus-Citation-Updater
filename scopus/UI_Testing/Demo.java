@@ -10,14 +10,15 @@ public class Demo {
 		// TODO Auto-generated method stub
   System.setProperty("webdriver.chrome.driver","C:\\Users\\sathiyajith\\Desktop\\chromedriver.exe");
   WebDriver driver=new ChromeDriver();
-  driver.get("http://localhost:8000/login");
+  driver.get("https://orcid.org/signin?oauth&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fauth%2Forcid%2Fcallback&scope=%2Fauthenticate&state=GmoHroEUceW6FHyHwgUKhKgY&client_id=APP-H1VKA3G0PJUY7B5B");
   driver.manage().window().maximize();
-  driver.findElement(By.id("orcid")).sendKeys("asasa");
-  driver.findElement(By.id("password")).sendKeys("asasa");
-  driver.findElement(By.id("loginSubmit")).click();
+  driver.findElement(By.id("userId")).sendKeys("kssathiya19@gmail.com");
+  driver.findElement(By.id("password")).sendKeys("kss@123456");
+  driver.findElement(By.id("form-sign-in-button")).click();
   String at=driver.getTitle();
-  System.out.println(at);
-  String et="Index Page";
+  System.out.println("Actual page: "+at);
+  String et="ORCID";
+  System.out.println("Expected page: "+et);
   driver.close();
   if(at.equalsIgnoreCase(et)) {
 	  System.out.println("Test success");

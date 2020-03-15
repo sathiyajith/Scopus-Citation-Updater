@@ -19,11 +19,12 @@ public class Demo4 {
 			  driver.get("http://localhost:8000/addNew");
 		  driver.findElement(By.id("facultyName")).sendKeys("sathiyajith K S");
 		  driver.findElement(By.id("scopusId")).sendKeys("212121");
-		  driver.findElement(By.id("authorId")).sendKeys("");
+		  driver.findElement(By.id("authorId")).sendKeys("123254");
 		  driver.findElement(By.id("addFaculty")).click();
 		  String at=driver.getTitle();
-		  System.out.println(at);
+		  System.out.println("Actual page: "+at);
 		  String et="Excel";
+		  System.out.println("Expected page: "+et);
 		  driver.close();
 		  if(at.equalsIgnoreCase(et)) {
 			  System.out.println("Test success");
