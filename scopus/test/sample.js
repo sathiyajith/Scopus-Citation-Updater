@@ -79,15 +79,15 @@ describe('2) LOGIN PAGE', function(done){
         });
     });
 
-    it('callback success', function(done) {
-        request.get('http://localhost:8000//auth/orcid/callback',function(error,response,body)
+    it('Again to Login Page', function(done) {
+        request.get('http://localhost:8000//login',function(error,response,body)
         {
             if( body==undefined || error)
             {
                 console.log(error);
             }
             else{
-                should(response.statusCode).to.equal(200);   
+                expect(response.statusCode).not.to.equal(200);   
             }
             done();
         });

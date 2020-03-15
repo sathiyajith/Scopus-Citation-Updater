@@ -176,7 +176,7 @@ app.get("/search/scopus",function(req,res)
 app.get("/details",function(req,res)
 {
     var name = req.query.name;
-    //console.log(name);
+    console.log(name);
 
     Scopus.find({name:name},{'_id':0,'authorId':1},function(err,result)
     {
@@ -186,7 +186,7 @@ app.get("/details",function(req,res)
             console.log(searchResult);
             //22988279600
             var options={
-            url :"https://api.elsevier.com/content/author/author_id/"+searchResult+"?apiKey=951919cec39c3b1f09885ba8575b587b",
+            url :"https://api.elsevier.com/content/author/author_id/"+searchResult+"?apiKey=8f37d808f954e09834b141d2fca97bbf",
             headers:{'Accept': 'application/json'}
             };
             request(options, function (error, response, body) {
@@ -209,9 +209,15 @@ app.get("/details",function(req,res)
                 else{
 
                 var reqData = jsonObj['author-retrieval-response'][0];
+                var authprofile = reqData["author-profile"]
+                var names = authprofile["preferred-name"]["indexed-name"]
+                console.log(names);
                 var citation = reqData["coredata"]["citation-count"];
                 var query = { authorId: searchResult };
-                Scopus.findOneAndUpdate(query, { citationCount: citation},function(err,doc,res){
+                
+                console.log(query);
+
+                Scopus.findOneAndUpdate(query, { name:names,citationCount: citation},function(err,doc,res){
                     if(err)
                     {
                         console.log("error");
@@ -221,9 +227,6 @@ app.get("/details",function(req,res)
                         console.log("success");
                     }
                 })
-
-
-                
                 res.render("details",{data:reqData});
 
                 }
@@ -359,6 +362,7 @@ app.listen(5000,"localhost",function()
     console.log("server started");
     mongoose.connect("mongodb://localhost/Scopus",{useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
         console.log("Connected to Database");
+        mongoose.set('useFindAndModify', false);
     }).catch((err) => {
         console.log("Not Connected to Database ERROR! ", err);
 });

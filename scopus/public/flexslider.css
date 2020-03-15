@@ -132,7 +132,6 @@ html[xmlns] .flexslider .slides {
   transition: all 0.3s ease-in-out;
 }
 .flex-direction-nav a:before {
-  font-family: "flexslider-icon";
   font-size: 40px;
   display: inline-block;
   content: '\f001';
@@ -166,7 +165,7 @@ html[xmlns] .flexslider .slides {
 .flex-direction-nav .flex-disabled {
   opacity: 0!important;
   filter: alpha(opacity=0);
-  cursor: default;
+  cursor: default;  
 }
 .flex-pauseplay a {
   display: block;
@@ -182,7 +181,6 @@ html[xmlns] .flexslider .slides {
   color: #000;
 }
 .flex-pauseplay a:before {
-  font-family: "flexslider-icon";
   font-size: 20px;
   display: inline-block;
   content: '\f004';
@@ -203,7 +201,6 @@ html[xmlns] .flexslider .slides {
   margin: 0 6px;
   display: inline-block;
   zoom: 1;
-  *display: inline;
 }
 .flex-control-paging li a {
   width: 11px;
