@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.0.1",
+    "mocha": "^11.7.5",
     "request": "^2.88.2",
     "sonarqube-scanner": "^2.5.0",
     "superagent": "^5.2.1",
